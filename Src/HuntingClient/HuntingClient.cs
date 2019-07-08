@@ -1,3 +1,8 @@
+using System;
+using GravityZero.HuntingClient.Infrastructure;
+using GravityZero.HuntingClient.Infrastructure.Domain;
+using GravityZero.HuntingClient.Infrastructure.Result;
+
 namespace GravityZero.HuntingClient
 {
     public class Client : IHuntingClient 
@@ -10,30 +15,30 @@ namespace GravityZero.HuntingClient
         {
 
         }
-
-        HuntingClientResult Login(Authentication authentication)
+        
+        public HuntingClientResult Login(Authentication authentication)
         {
-            authentication.Login(authentication);
+            return this.authentication.Login(authentication);
         }
 
-        HuntingClientResult Logout()
+        public HuntingClientResult Logout()
         {
-            authentication.Logout();
+            return this.authentication.Logout();
         }
 
-        HuntingClientResult Update(FullUser user)
+        public HuntingClientResult Update(FullUser user)
         {
-            userManipulation.Update(user);
+            return this.userManipulation.Update(user);
         }
 
-        HuntingClientResult Delete(Guid identifier)
+        public HuntingClientResult Delete(Guid identifier)
         {
-            userManipulation.Delete(identifier);
+            return this.userManipulation.Delete(identifier);
         }
 
-        void RegisterStateChanger(IStateChanger changer)
+        public void RegisterStateChanger(IStateChanger changer)
         {
-            this.changer = changer;
+            
         }
     }
 }
