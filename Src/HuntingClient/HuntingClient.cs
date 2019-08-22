@@ -10,20 +10,31 @@ namespace GravityZero.HuntingClient
         private IAuthentication authentication;
         private IUserManipulation userManipulation;
         private IStateChanger changer;
+        private Guid identifier;
         
         public Client()
         {
-
+            this.authentication = new AuthenticationDisconnect();
         }
         
         public HuntingClientResult Login(Authentication authentication)
         {
-            return this.authentication.Login(authentication);
+
+            HuntingClientResult loginResult = this.authentication.Login(authentication);
+            if (loginResult.IsSuccess){
+                this.authentication = new AuthenticationConnected(identifier);
+            }
+            return loginResult;
         }
 
         public HuntingClientResult Logout()
         {
-            return this.authentication.Logout();
+            HuntingClientResult logoutResult = this.authentication.Logout();
+            if (logoutResult.IsSuccess)
+            {
+                this.authentication = new AuthenticationDisconnect();
+            }
+            return logoutResult;
         }
 
         public HuntingClientResult Update(FullUser user)

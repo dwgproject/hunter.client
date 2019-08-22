@@ -17,7 +17,7 @@ namespace GravityZero.HuntingClient
 
         public HuntingClientResult Login(Authentication authentication)
         {
-            return new HuntingClientResult(false, "You are logged.");
+            return new HuntingClientResult(true, "You are logged.");
         }
 
         public HuntingClientResult Logout()
